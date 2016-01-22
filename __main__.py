@@ -72,7 +72,7 @@ class TestBot(SingleServerIRCBot):
 
     def on_welcome(self, c, e):
         c.join(self.channel)
-        c.privmsg(self.channel, "Bonjour tout le monde :D")
+        #c.privmsg(self.channel, "Bonjour tout le monde :D")
 
     def on_privmsg(self, c, e):
         self.do_command(e, e.arguments()[0])

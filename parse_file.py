@@ -26,6 +26,7 @@ def parser_all_day(url, d):
 
     T = []
     for element in parsed.getElementsByTagName('event'):
+        #DATE
         if (element.getAttribute('date') == Date and int(element.childNodes[1].firstChild.nodeValue) == weekday):
             T1 = []
             #HEURE
@@ -37,44 +38,53 @@ def parser_all_day(url, d):
             #GROUPS
 
             for j in element.getElementsByTagName('group'):
-                bool = False
-                bool2 = False
+                Gbool = False
+                G2bool = False
+                Optbool = False
                 U = []
                 for k in range(1,len(j.childNodes),2):
-                    U = U + [str(j.childNodes[k].firstChild.nodeValue).encode('utf-8')]
+                    tmp = str(j.childNodes[k].firstChild.nodeValue.encode('utf-8'))
+                    if ' GROUPE' in tmp:
+                        G2bool = True
+                    elif ' G' in tmp:
+                        Gbool = True
+                    elif ' option' in tmp:
+                        Optbool = True
+                    U = U + [tmp]
+                
+                V = []
+                tmp = ""
 
-                #for l in range(len(U)):
-                #    if 'G' in U[l]:
-                #        print U[l]
-                #        for l2 in range(len(U[l])-1):
-                #            if ("G" in U[l][l2] and not bool):
-                #                U = str(U[l][l2]) + str(U[l][l2+1])
-                #                T1 = T1 + [U]
-                #                bool = True
-                #                continue
-                #    elif 'option' in U[l]:
-                #        bool2 = False
-                #        bool = False
-                #        for l2 in range(len(U[l])-1):
+                if G2bool:
+                    for k in range(len(U)):
+                        tmp2 = U[k].find('GROUPE')
+                        if tmp2 != -1:
+                            if U[k][tmp2 + 8] != tmp:
+                                V += [U[k][tmp2 + 8]]
+                                tmp = U[k][tmp2 + 8]
+                elif Gbool:
+                    for k in range(len(U)):
+                        tmp2 = U[k].find('G')
+                        if tmp2 != -1:
+                            if U[k][tmp2 + 1] != tmp:
+                                V += [U[k][tmp2 + 1]]
+                                tmp = U[k][tmp2 + 1]
+                        
+                elif Optbool:
+                    for k in range(len(U)):
+                        tmp2 = U[k].find('option')
+                        if tmp2 != -1:
+                            if U[k][tmp2 + 7] != tmp:
+                                V += [U[k][tmp2 + 7]]
+                                tmp = U[k][tmp2 + 7]
 
-                #            if (str(U[l][l2]).isdigit() and bool):
-                #                U2 = U2 + str(U[l][l2])
-                #                T1 = T1 + ["-"] + U2 + ["-"]
-                #                bool2 = True
-                #
-                #            elif (U[l][l2] == "o" and not bool):
-                #                U2 = "G"
-                #                bool = True
-                #                break
-
-                #            if bool2:
-                #                break
-                #                
-                #    if bool:
-                #        break
-
-                if not bool:
+                for k in range(len(V)):
+                    V[k] = "G" + V[k]
+                
+                if (len(V) == 0):
                     T1 = T1 + ["-"] + U + ["-"]
+                else:
+                    T1 = T1 + ["-"] + V + ["-"]
             
             #STAFF
             for j in element.getElementsByTagName('staff'):
@@ -120,44 +130,54 @@ def parser_delayed(url):
                         for j in element.getElementsByTagName('module'):
                             T1 = T1 + [IRC_BOLD + j.childNodes[1].firstChild.nodeValue.encode('utf-8') + IRC_BOLD]
                         #GROUPS
-                        
                         for j in element.getElementsByTagName('group'):
-                            bool = False
-                            bool2 = False
+                            Gbool = False
+                            G2bool = False
+                            Optbool = False
                             U = []
                             for k in range(1,len(j.childNodes),2):
-                                U = U + [str(j.childNodes[k].firstChild.nodeValue).encode('utf-8')]
+                                tmp = str(j.childNodes[k].firstChild.nodeValue.encode('utf-8'))
+                                if ' GROUPE' in tmp:
+                                    G2bool = True
+                                elif ' G' in tmp:
+                                    Gbool = True
+                                elif ' option' in tmp:
+                                    Optbool = True
+                                U = U + [tmp]
+                
+                            V = []
+                            tmp = ""
 
-                            #for l in range(len(U)):
-                            #    if 'G' in U[l]:
-                            #        for l2 in range(len(U[l])-1):
-                            #            if (U[l][l2] == "G" and not bool):
-                            #                U = str(U[l][l2]) + str(U[l][l2+1])
-                            #                T1 = T1 + [U]
-                            #                bool = True
-                            #                continue
-                            #    elif 'option' in U[l]:
-                            #        bool2 = False
-                            #        bool = False
-                            #        for l2 in range(len(U[l])-1):
+                            if G2bool:
+                                for k in range(len(U)):
+                                    tmp2 = U[k].find('GROUPE')
+                                    if tmp2 != -1:
+                                        if U[k][tmp2 + 8] != tmp:
+                                            V += [U[k][tmp2 + 8]]
+                                            tmp = U[k][tmp2 + 8]
+                            elif Gbool:
+                                for k in range(len(U)):
+                                    tmp2 = U[k].find('G')
+                                    if tmp2 != -1:
+                                        if U[k][tmp2 + 1] != tmp:
+                                            V += [U[k][tmp2 + 1]]
+                                            tmp = U[k][tmp2 + 1]
+                                            
+                            elif Optbool:
+                                for k in range(len(U)):
+                                    tmp2 = U[k].find('option')
+                                    if tmp2 != -1:
+                                        if U[k][tmp2 + 7] != tmp:
+                                            V += [U[k][tmp2 + 7]]
+                                            tmp = U[k][tmp2 + 7]
 
-                            #            if (str(U[l][l2]).isdigit() and bool):
-                            #                U2 = U2 + str(U[l][l2])
-                            #                bool2 = True
-
-                            #            elif (U[l][l2] == "o" and not bool):
-                            #                U2 = "G"
-                            #                bool = True
-                            #                break
-
-                            #            if bool2:
-                            #                break
-                                
-                            #    if bool:
-                            #        break
-
-                            if not bool:
-                                T1 = T1 + U
+                            for k in range(len(V)):
+                                V[k] = "G" + V[k]
+                
+                            if (len(V) == 0):
+                                T1 = T1 + ["-"] + U + ["-"]
+                            else:
+                                T1 = T1 + ["-"] + V + ["-"]
 
                         #STAFF
                         for j in element.getElementsByTagName('staff'):

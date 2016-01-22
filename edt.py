@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 classe_url_licence = [
+    ["IM400", "https://edt-st.u-bordeaux.fr/etudiants/Licence/Semestre2/g146264", "L2 Math/Info"],
+    ["IM600", "https://edt-st.u-bordeaux.fr/etudiants/Licence/Semestre2/g184104", "L3 Math/Info"],
     ["IN400A1", "https://edt-st.u-bordeaux.fr/etudiants/Licence/Semestre2/g74276", "L2 Info."],
     ["IN400A2", "https://edt-st.u-bordeaux.fr/etudiants/Licence/Semestre2/g74298", "L2 Info."],
     ["IN400A3", "https://edt-st.u-bordeaux.fr/etudiants/Licence/Semestre2/g109220", "L2 Info."],
