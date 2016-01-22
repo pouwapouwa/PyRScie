@@ -43,34 +43,35 @@ def parser_all_day(url, d):
                 for k in range(1,len(j.childNodes),2):
                     U = U + [str(j.childNodes[k].firstChild.nodeValue).encode('utf-8')]
 
-                for l in range(len(U)):
-                    if 'G' in U[l]:
-                        for l2 in range(len(U[l])-1):
-                            if (U[l][l2] == "G" and not bool):
-                                U = str(U[l][l2]) + str(U[l][l2+1])
-                                T1 = T1 + [U]
-                                bool = True
-                                continue
-                    elif 'option' in U[l]:
-                        bool2 = False
-                        bool = False
-                        for l2 in range(len(U[l])-1):
+                #for l in range(len(U)):
+                #    if 'G' in U[l]:
+                #        print U[l]
+                #        for l2 in range(len(U[l])-1):
+                #            if ("G" in U[l][l2] and not bool):
+                #                U = str(U[l][l2]) + str(U[l][l2+1])
+                #                T1 = T1 + [U]
+                #                bool = True
+                #                continue
+                #    elif 'option' in U[l]:
+                #        bool2 = False
+                #        bool = False
+                #        for l2 in range(len(U[l])-1):
 
-                            if (str(U[l][l2]).isdigit() and bool):
-                                U2 = U2 + str(U[l][l2])
-                                T1 = T1 + ["-"] + U2 + ["-"]
-                                bool2 = True
+                #            if (str(U[l][l2]).isdigit() and bool):
+                #                U2 = U2 + str(U[l][l2])
+                #                T1 = T1 + ["-"] + U2 + ["-"]
+                #                bool2 = True
+                #
+                #            elif (U[l][l2] == "o" and not bool):
+                #                U2 = "G"
+                #                bool = True
+                #                break
 
-                            elif (U[l][l2] == "o" and not bool):
-                                U2 = "G"
-                                bool = True
-                                break
-
-                            if bool2:
-                                break
-                                
-                    if bool:
-                        break
+                #            if bool2:
+                #                break
+                #                
+                #    if bool:
+                #        break
 
                 if not bool:
                     T1 = T1 + ["-"] + U + ["-"]
@@ -127,33 +128,33 @@ def parser_delayed(url):
                             for k in range(1,len(j.childNodes),2):
                                 U = U + [str(j.childNodes[k].firstChild.nodeValue).encode('utf-8')]
 
-                            for l in range(len(U)):
-                                if 'G' in U[l]:
-                                    for l2 in range(len(U[l])-1):
-                                        if (U[l][l2] == "G" and not bool):
-                                            U = str(U[l][l2]) + str(U[l][l2+1])
-                                            T1 = T1 + [U]
-                                            bool = True
-                                            continue
-                                elif 'option' in U[l]:
-                                    bool2 = False
-                                    bool = False
-                                    for l2 in range(len(U[l])-1):
+                            #for l in range(len(U)):
+                            #    if 'G' in U[l]:
+                            #        for l2 in range(len(U[l])-1):
+                            #            if (U[l][l2] == "G" and not bool):
+                            #                U = str(U[l][l2]) + str(U[l][l2+1])
+                            #                T1 = T1 + [U]
+                            #                bool = True
+                            #                continue
+                            #    elif 'option' in U[l]:
+                            #        bool2 = False
+                            #        bool = False
+                            #        for l2 in range(len(U[l])-1):
 
-                                        if (str(U[l][l2]).isdigit() and bool):
-                                            U2 = U2 + str(U[l][l2])
-                                            bool2 = True
+                            #            if (str(U[l][l2]).isdigit() and bool):
+                            #                U2 = U2 + str(U[l][l2])
+                            #                bool2 = True
 
-                                        elif (U[l][l2] == "o" and not bool):
-                                            U2 = "G"
-                                            bool = True
-                                            break
+                            #            elif (U[l][l2] == "o" and not bool):
+                            #                U2 = "G"
+                            #                bool = True
+                            #                break
 
-                                        if bool2:
-                                            break
+                            #            if bool2:
+                            #                break
                                 
-                                if bool:
-                                    break
+                            #    if bool:
+                            #        break
 
                             if not bool:
                                 T1 = T1 + U

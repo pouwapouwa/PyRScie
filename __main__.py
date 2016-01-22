@@ -77,53 +77,53 @@ class TestBot(SingleServerIRCBot):
     def on_privmsg(self, c, e):
         self.do_command(e, e.arguments()[0])
 
-    def on_pubmsg(self, c, e):
-        a = e.arguments()
-        text = get_args(a)
-        nick = nm_to_n(e.source())
+    #def on_pubmsg(self, c, e):
+    #    a = e.arguments()
+    #    text = get_args(a)
+    #    nick = nm_to_n(e.source())
 
-        if (("oui" in str(text).lower()) and (self.bool == True)):
-            c.privmsg(self.channel, "Hum, j'aime pas trop beaucoup ça ...")
+    #    if (("oui" in str(text).lower()) and (self.bool == True)):
+    #        c.privmsg(self.channel, "Hum, j'aime pas trop beaucoup ça ...")
 
-        elif (("non" in str(text).lower()) and (self.bool == True)):
-            c.privmsg(self.channel, "Ouf. J'avais les oreilles qui sifflent ...")
+    #    elif (("non" in str(text).lower()) and (self.bool == True)):
+    #        c.privmsg(self.channel, "Ouf. J'avais les oreilles qui sifflent ...")
 
-        self.bool = False
+    #    self.bool = False
 
-        tmp = di(text)
-        if len(tmp) != 0:
-            c.privmsg(self.channel, tmp)
+    #    tmp = di(text)
+    #    if len(tmp) != 0:
+    #        c.privmsg(self.channel, tmp)
 
-        if c.get_nickname() in text:
-            c.privmsg(self.channel, "On parle de moi ?")
-            self.bool = True
+    #    if c.get_nickname() in text:
+    #        c.privmsg(self.channel, "On parle de moi ?")
+    #        self.bool = True
 
-        if (str(text) == str(text).upper() and str(text).isalnum() and not str(txt).isdigit()):
-            c.privmsg(self.channel, "ON NE CRIE PAS ICI, SVP !")
+    #    if (str(text) == str(text).upper() and str(text).isalnum() and not str(txt).isdigit()):
+    #        c.privmsg(self.channel, "ON NE CRIE PAS ICI, SVP !")
 
-        if "bonjour" in str(text).lower():
-            c.privmsg(self.channel, "Bonjour " + nick + " !")
+    #    if "bonjour" in str(text).lower():
+    #        c.privmsg(self.channel, "Bonjour " + nick + " !")
 
-        if "bonsoir" in str(text).lower():
-            c.privmsg(self.channel, "Bonsoir " + nick + " !")
+    #    if "bonsoir" in str(text).lower():
+    #        c.privmsg(self.channel, "Bonsoir " + nick + " !")
 
-        if "\o/" in text:
-            c.action(self.channel, "siffle avec ses dents !")
+    #    if "\o/" in text:
+    #        c.action(self.channel, "siffle avec ses dents !")
 
-    def on_dccmsg(self, c, e):
-        c.privmsg("Tu viens de dire : " + e.arguments()[0])
+    #def on_dccmsg(self, c, e):
+    #    c.privmsg("Tu viens de dire : " + e.arguments()[0])
 
-    def on_dccchat(self, c, e):
-        if len(e.arguments()) != 2:
-            return
-        args = e.arguments()[1].split()
-        if len(args) == 4:
-            try:
-                address = ip_numstr_to_quad(args[2])
-                port = int(args[3])
-            except ValueError:
-                return
-            self.dcc_connect(address, port)
+    #def on_dccchat(self, c, e):
+    #    if len(e.arguments()) != 2:
+    #        return
+    #    args = e.arguments()[1].split()
+    #    if len(args) == 4:
+    #        try:
+    #            address = ip_numstr_to_quad(args[2])
+    #            port = int(args[3])
+    #        except ValueError:
+    #            return
+    #        self.dcc_connect(address, port)
 
     def do_command(self, e, cmd):
         nick = nm_to_n(e.source())
@@ -133,11 +133,6 @@ class TestBot(SingleServerIRCBot):
             arguments = (e.arguments())[0].split()
             find = find_user_and_group(self.user_to_group, nick)
             text = ""
-
-            print cmd
-            print cmd[0]
-            print e.arguments()
-            print e.arguments()[0]
         
             if arguments[0][0] == "\'":
                 c.privmsg(nick, "Essaie sans l'apostrophe ;)")
@@ -300,10 +295,10 @@ class TestBot(SingleServerIRCBot):
                                     return
                                 else:
                                     bool = False
-                                    for i in range(len(text)):
+                                    for j in range(len(text)):
                                         text2 = "Aujourd'hui: "
-                                        for j in range(len(text[i])):
-                                            text2 = text2 + " " +  str(text[i][j])
+                                        for k in range(len(text[i])):
+                                            text2 = text2 + " " +  str(text[j][k])
                                         c.privmsg(nick, text2)
                                         bool = True
                                     if not bool:
@@ -322,8 +317,9 @@ class TestBot(SingleServerIRCBot):
                                     bool = False
                                     for j in range(len(text)):
                                         text2 = "Aujourd'hui: "
-                                        for j in range(len(text[i])):
-                                            text2 = text2 + " " +  str(text[i][j])
+                                        print text, len(text)
+                                        for k in range(len(text[j])):
+                                            text2 = text2 + " " +  str(text[j][k])
                                             bool = True
                                         c.privmsg(nick, text2)
                                     if not bool:
@@ -395,9 +391,7 @@ class TestBot(SingleServerIRCBot):
                     joke = ""
                     for i in range(2, len(arguments)):
                         joke = joke + " " + arguments[i]
-                    print self.jokes
                     self.jokes.append([joke])
-                    print self.jokes
                     rewrite_jokes(self.jokes)
                     text = "Cette blague a bien été enregistrée \o/"
                 else:

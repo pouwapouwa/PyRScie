@@ -101,9 +101,7 @@ def rewrite_user_to_group(u_t_g):
 
 
     file.write("[")
-    print "u_t_g: ", u_t_g
     for j in range(len(u_t_g[len(u_t_g)-1])):
-        print j, u_t_g[len(u_t_g)-1]
         file.write("\"" + u_t_g[len(u_t_g)-1][j] + "\", ")
     file.write("\"" + u_t_g[len(u_t_g)-1][len(u_t_g[len(u_t_g)-1])-1] + "\"]")
 
@@ -142,8 +140,6 @@ def rewrite_jokes(joke):
     file = open('jokes.py', 'w')
     file.write("# -*- coding: utf-8 -*-")
     file.write("\njokes = [")
-
-    print len(joke)
     
     for i in range(len(joke)-1):
         file.write("[\"" + joke[i][0] + "\"], ")
