@@ -168,7 +168,7 @@ class TestBot(SingleServerIRCBot):
             elif "!edt" in cmd:
                        
                 if ((len(arguments) == 1) and (len(find) == 0)):
-                    c.privmsg(nick, "Il faut enregistré un groupe ou alors rajouter des arguments. Pourquoi ne pas tenter \'!edt help\' ?")
+                    c.privmsg(nick, "Il faut enregistrer un groupe ou alors rajouter des arguments. Pourquoi ne pas tenter \'!edt help\' ?")
 
                 elif (len(arguments) == 1):
                     edt = find[0]
@@ -297,7 +297,7 @@ class TestBot(SingleServerIRCBot):
                                     bool = False
                                     for j in range(len(text)):
                                         text2 = "Aujourd'hui: "
-                                        for k in range(len(text[i])):
+                                        for k in range(len(text[j])):
                                             text2 = text2 + " " +  str(text[j][k])
                                         c.privmsg(nick, text2)
                                         bool = True
@@ -413,8 +413,8 @@ class TestBot(SingleServerIRCBot):
             file = open("log/errors", 'a+')
             file.write("\n" + strftime("%d/%m/%Y  %H:%M", gmtime()) + " : " + nick + " " + cmd + "\n")
             file.close()
-            pass
-            #raise 
+            #pass
+            raise 
 
 
 
